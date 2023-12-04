@@ -1,8 +1,7 @@
-package main
+package day04
 
 import (
 	_ "embed"
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -10,27 +9,6 @@ import (
 
 //go:embed real.input
 var realInput string
-
-func main() {
-	_, sum := calculate(realInput)
-	fmt.Println("Sum:", sum)
-}
-
-func calculate(input string) ([]int, int) {
-	rows := strings.Split(input, "\n")
-	result := make([]int, len(rows))
-	sum := 0
-
-	for idx, row := range rows {
-		winning := parseWinningNumbers(row)
-		youHave := parseYourNumbers(row)
-
-		result[idx] = calculateScore(winning, youHave)
-		sum += result[idx]
-	}
-
-	return result, sum
-}
 
 func parseWinningNumbers(row string) map[int]bool {
 	numbers := strings.Split(row, ":")[1]
@@ -62,20 +40,4 @@ func parseYourNumbers(row string) []int {
 	}
 
 	return result
-}
-
-func calculateScore(winning map[int]bool, youHave []int) int {
-	var score int
-
-	for _, no := range youHave {
-		if winning[no] {
-			if score == 0 {
-				score = 1
-			} else {
-				score = score * 2
-			}
-		}
-	}
-
-	return score
 }

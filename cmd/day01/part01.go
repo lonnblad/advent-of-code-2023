@@ -1,22 +1,18 @@
-package main
+package day01
 
 import (
 	_ "embed"
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
-//go:embed real.input
-var realInput string
-
-func main() {
-	_, sum := calculate(realInput)
-	fmt.Println("Sum:", sum)
+func SolvePartOneForRealInput() int {
+	_, sum := SolvePartOneForInput(realInput)
+	return sum
 }
 
-func calculate(input string) ([]int, int) {
+func SolvePartOneForInput(input string) ([]int, int) {
 	parts := strings.Split(input, "\n")
 	result := make([]int, len(parts))
 	sum := 0

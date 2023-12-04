@@ -1,22 +1,15 @@
-package main
+package day03
 
 import (
-	_ "embed"
-	"fmt"
-	"regexp"
-	"strconv"
 	"strings"
 )
 
-//go:embed real.input
-var realInput string
-
-func main() {
-	_, sum := calculate(realInput)
-	fmt.Println("Sum:", sum)
+func SolvePartOneForRealInput() int {
+	_, sum := SolvePartOneForInput(realInput)
+	return sum
 }
 
-func calculate(input string) ([]int, int) {
+func SolvePartOneForInput(input string) ([]int, int) {
 	rows := strings.Split(input, "\n")
 	result := []int{}
 	sum := 0
@@ -46,38 +39,6 @@ func parseSymbol(rows []string) map[int][]int {
 	}
 
 	return symbolCoords
-}
-
-type partNumber struct {
-	number          int
-	row, start, end int
-}
-
-func parsePotentialPartNumbers(rows []string) []partNumber {
-	parts := []partNumber{}
-
-	pattern := regexp.MustCompile(`(\d+)`)
-
-	for idx, row := range rows {
-		var offset int
-
-		for true {
-			loc := pattern.FindIndex([]byte(row))
-			if loc == nil {
-				break
-			}
-
-			val, _ := strconv.Atoi(row[loc[0]:loc[1]])
-
-			part := partNumber{number: val, row: idx, start: offset + loc[0], end: offset + loc[1] - 1}
-			parts = append(parts, part)
-
-			offset += loc[1]
-			row = row[loc[1]:]
-		}
-	}
-
-	return parts
 }
 
 func filterRealPartNumbers(potentialParts []partNumber, symbols map[int][]int) []partNumber {

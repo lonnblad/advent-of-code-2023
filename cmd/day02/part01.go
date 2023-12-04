@@ -1,20 +1,11 @@
-package main
+package day02
 
 import (
-	_ "embed"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
-
-//go:embed real.input
-var realInput string
-
-func main() {
-	_, sum := calculate(realInput)
-	fmt.Println("Sum:", sum)
-}
 
 const (
 	maxRed   = 12
@@ -22,7 +13,12 @@ const (
 	maxBlue  = 14
 )
 
-func calculate(input string) ([]bool, int) {
+func SolvePartOneForRealInput() int {
+	_, sum := SolvePartOneForInput(realInput)
+	return sum
+}
+
+func SolvePartOneForInput(input string) ([]bool, int) {
 	games := strings.Split(input, "\n")
 	result := make([]bool, len(games))
 	sum := 0
@@ -50,15 +46,6 @@ func calculate(input string) ([]bool, int) {
 	}
 
 	return result, sum
-}
-
-func parseGameNo(game string) int {
-	re := regexp.MustCompile(`Game (\d+)`)
-
-	match := re.FindStringSubmatch(game)[1]
-	gameNo, _ := strconv.Atoi(match)
-
-	return gameNo
 }
 
 func isColorBelowLimit(game, color string, limit int) bool {

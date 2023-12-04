@@ -1,22 +1,18 @@
-package main
+package day02
 
 import (
-	_ "embed"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
-//go:embed real.input
-var realInput string
-
-func main() {
-	_, sum := calculate(realInput)
-	fmt.Println("Sum:", sum)
+func SolvePartTwoForRealInput() int {
+	_, sum := SolvePartTwoForInput(realInput)
+	return sum
 }
 
-func calculate(input string) ([]int, int) {
+func SolvePartTwoForInput(input string) ([]int, int) {
 	games := strings.Split(input, "\n")
 	result := make([]int, len(games))
 	sum := 0
@@ -31,15 +27,6 @@ func calculate(input string) ([]int, int) {
 	}
 
 	return result, sum
-}
-
-func parseGameNo(game string) int {
-	re := regexp.MustCompile(`Game (\d+)`)
-
-	match := re.FindStringSubmatch(game)[1]
-	gameNo, _ := strconv.Atoi(match)
-
-	return gameNo
 }
 
 func findMinForColor(game, color string) int {
