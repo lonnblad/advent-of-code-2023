@@ -12,6 +12,7 @@ import (
 	"github.com/lonnblad/advent-of-code-2023/cmd/day04"
 	"github.com/lonnblad/advent-of-code-2023/cmd/day05"
 	"github.com/lonnblad/advent-of-code-2023/cmd/day06"
+	"github.com/lonnblad/advent-of-code-2023/cmd/day07"
 )
 
 func init() {
@@ -19,7 +20,7 @@ func init() {
 	rootCmd.Flags().IntVarP(&part, "part", "p", part, "Which Part to run")
 }
 
-var day, part int = 6, 2
+var day, part int = 7, 2
 
 var rootCmd = &cobra.Command{
 	Use:   "aoc",
@@ -54,6 +55,10 @@ var rootCmd = &cobra.Command{
 			answer = day06.SolvePartOneForRealInput()
 		case day == 6 && part == 2:
 			answer = day06.SolvePartTwoForRealInput()
+		case day == 7 && part == 1:
+			answer = day07.SolvePartOneForRealInput()
+		case day == 7 && part == 2:
+			answer = day07.SolvePartTwoForRealInput()
 		default:
 			fmt.Println("Not Implemented")
 			return
