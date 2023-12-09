@@ -30,51 +30,13 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Run Day: %d, Part: %d\n", day, part)
 
-		var answer int
-
-		switch {
-		case day == 1 && part == 1:
-			answer = day01.SolvePartOneForRealInput()
-		case day == 1 && part == 2:
-			answer = day01.SolvePartTwoForRealInput()
-		case day == 2 && part == 1:
-			answer = day02.SolvePartOneForRealInput()
-		case day == 2 && part == 2:
-			answer = day02.SolvePartTwoForRealInput()
-		case day == 3 && part == 1:
-			answer = day03.SolvePartOneForRealInput()
-		case day == 3 && part == 2:
-			answer = day03.SolvePartTwoForRealInput()
-		case day == 4 && part == 1:
-			answer = day04.SolvePartOneForRealInput()
-		case day == 4 && part == 2:
-			answer = day04.SolvePartTwoForRealInput()
-		case day == 5 && part == 1:
-			answer = day05.SolvePartOneForRealInput()
-		case day == 5 && part == 2:
-			answer = day05.SolvePartTwoForRealInput()
-		case day == 6 && part == 1:
-			answer = day06.SolvePartOneForRealInput()
-		case day == 6 && part == 2:
-			answer = day06.SolvePartTwoForRealInput()
-		case day == 7 && part == 1:
-			answer = day07.SolvePartOneForRealInput()
-		case day == 7 && part == 2:
-			answer = day07.SolvePartTwoForRealInput()
-		case day == 8 && part == 1:
-			answer = day08.SolvePartOneForRealInput()
-		case day == 8 && part == 2:
-			answer = day08.SolvePartTwoForRealInput()
-		case day == 9 && part == 1:
-			answer = day09.SolvePartOneForRealInput()
-		case day == 9 && part == 2:
-			answer = day09.SolvePartTwoForRealInput()
-		default:
+		solution, exist := solutions[day*10+part]
+		if !exist {
 			fmt.Println("Not Implemented")
 			return
 		}
 
-		fmt.Println("Answer:", answer)
+		fmt.Println("Answer:", solution())
 	},
 }
 
@@ -83,4 +45,27 @@ func Execute() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+}
+
+var solutions = map[int]func() int{}
+
+func init() {
+	solutions[11] = day01.SolvePartOneForRealInput
+	solutions[12] = day01.SolvePartTwoForRealInput
+	solutions[21] = day02.SolvePartOneForRealInput
+	solutions[22] = day02.SolvePartTwoForRealInput
+	solutions[31] = day03.SolvePartOneForRealInput
+	solutions[32] = day03.SolvePartTwoForRealInput
+	solutions[41] = day04.SolvePartOneForRealInput
+	solutions[42] = day04.SolvePartTwoForRealInput
+	solutions[51] = day05.SolvePartOneForRealInput
+	solutions[52] = day05.SolvePartTwoForRealInput
+	solutions[61] = day06.SolvePartOneForRealInput
+	solutions[62] = day06.SolvePartTwoForRealInput
+	solutions[71] = day07.SolvePartOneForRealInput
+	solutions[72] = day07.SolvePartTwoForRealInput
+	solutions[81] = day08.SolvePartOneForRealInput
+	solutions[82] = day08.SolvePartTwoForRealInput
+	solutions[91] = day09.SolvePartOneForRealInput
+	solutions[92] = day09.SolvePartTwoForRealInput
 }
