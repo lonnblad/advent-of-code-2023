@@ -22,8 +22,8 @@ func Test_SolvePartTwoForInput_ExampleInput(t *testing.T) {
 	assert.Equal(t, expectedSum, actualSum)
 }
 
-// func Test_SolvePartTwoForInput_RealInput(t *testing.T) {
-// 	expectedSum := 41382569
-// 	actualSum := day07.SolvePartTwoForRealInput()
-// 	assert.Equal(t, expectedSum, actualSum)
-// }
+func Test_SolvePartTwoForInput_RealInput(t *testing.T) {
+	expectedSum := 251195607
+	actualSum := day07.SolvePartTwoForRealInput()
+	assert.Equal(t, expectedSum, actualSum)
+}
